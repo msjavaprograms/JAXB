@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.Employee.org/Employee" xmlns:emp="http://www.Employee.org/Employee"
+	elementFormDefault="qualified">
+
+	<!-- Root Element -->
+	<xs:element name="Employee" type="emp:Employee" />
+
+	<!-- Sequence - Tells to XML Parser that all elements in this complextype 
+		should appear in the same order in XML file which import this schema -->
+	<xs:complexType name="Employee">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" minOccurs="1" />
+			<xs:element name="age" type="xs:int" />
+			<xs:element name="gender" type="xs:string" />
+			<xs:element name="dob" type="xs:date" />
+			<xs:element name="email" type="emp:string15Char"
+				maxOccurs="unbounded" />
+			<xs:element name="PayemntType" type="emp:PaymentType" />
+		</xs:sequence>
+
+	</xs:complexType>
+	
+	<!-- Add restrictions using Simple type -->
+	<!-- Restrict the string length as 15 character -->
+	<xs:simpleType name="string15Char">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="15"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- Restrict the id should only have integer values -->
+	<xs:simpleType name="ID">
+		<xs:restriction base="xs:int">
+			<xs:pattern value="[0-9-]*"></xs:pattern>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- Restrict the Gender value should be M or F -->
+	<xs:simpleType name="Gender">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="M" />
+			<xs:enumeration value="F"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	
+	<xs:complexType name="PaymentType">
+		<xs:choice>
+			<xs:element name="cash" type="xs:int" />
+			<xs:element name="BankAccount" type="emp:BankAccountDetails" />
+		</xs:choice>
+	</xs:complexType>
+
+	<xs:complexType name="BankAccountDetails">
+		<xs:all>
+			<xs:element name="AccountNumber" type="xs:string" />
+			<xs:element name="BankName" type="xs:string" />
+			<xs:element name="IFSCCode" type="xs:string" />
+		</xs:all>
+	</xs:complexType>
+	
+</xs:schema>

@@ -21,7 +21,8 @@ public class XMLParser
 		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 		Document document;
 		
-		document = documentBuilder.parse(new File("E:\\Workspace\\Webservices\\XMLParsers\\src\\main\\resources\\Employee.xml"));
+		document = documentBuilder.parse(new 
+				File("E:\\Workspace\\Webservices\\XMLParsers\\src\\main\\resources\\Employee.xml"));
 		
 		document.getDocumentElement().normalize();
 		
